@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:context="http://www.springframework.org/schema/context"
-xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans.xsd
-	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context.xsd
-	http://www.springframework.org/schema/mvc
-	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-<!-- to scan the packages in backend & frontend-->
-<context:component-scan base-package="com.controller"/>
-<context:component-scan base-package="com.backend.*"/>
-<mvc:annotation-driven/>
-<mvc:resources mapping="/resources/**" location="/resources/" />
-<context:annotation-config/>
-
-	<bean id="viewResolver"	class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
-        <property name="prefix">
-            <value>/WEB-INF/views/</value>
-        </property>
-        <property name="suffix">
-            <value>.jsp</value>
-        </property>
-        </bean>
-	<bean id="multipartResolver"
+<beans xmlns="http://www.springframework.org/schema/beans"    
+    xmlns:mvc="http://www.springframework.org/schema/mvc"    
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+        <mvc:default-servlet-handler/>
+   <mvc:annotation-driven></mvc:annotation-driven>
+   <context:annotation-config></context:annotation-config>
+   
+  <context:component-scan base-package="com.backend.*"/>
+   
+    
+    
+<bean  id="viewResolver" class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name = "prefix" value = "/WEB-INF/views/" />
+      <property name = "suffix" value = ".jsp" />
+   </bean>
+   
+   
+  
+   <bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="100000" />
 	</bean>
-    
+  
+ 
+
+
 </beans>

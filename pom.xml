@@ -2,14 +2,19 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bake</groupId>
-  <artifactId>BakeNCakeFront</artifactId>
+  <artifactId>EcomFront</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>BakeNCakeFront Maven Webapp</name>
+  <name>EcomBack Maven Webapp</name>
   <url>http://maven.apache.org</url>
   
   
   <dependencies>
+  <dependency>
+  <groupId>com.bakeryshop</groupId>
+  <artifactId>EcomBack</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -29,11 +34,6 @@
     <version>4.2.3.RELEASE</version>
 </dependency>
 	<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
-<dependency>
-    <groupId>org.springframework.security</groupId>
-    <artifactId>spring-security-config</artifactId>
-    <version>4.2.3.RELEASE</version>
-</dependency>
 	<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
 <dependency>
     <groupId>org.springframework.security</groupId>
@@ -63,10 +63,36 @@
     	<artifactId>javax.servlet-api</artifactId>
     	<version>3.1.0</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/jstl/jstl -->
+    
+    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+
     <dependency>
-    <groupId>com.bakeryshop</groupId>
-  <artifactId>BakeNCake</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-beans</artifactId>
+    	<version>4.3.12.RELEASE</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-jdbc</artifactId>
+    	<version>4.3.12.RELEASE</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-orm</artifactId>
+    	<version>4.3.12.RELEASE</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-core</artifactId>
+    	<version>4.3.12.RELEASE</version>
+    </dependency>
+    <dependency>
+    	<groupId>javax.servlet</groupId>
+    	<artifactId>jstl</artifactId>
+    	<version>1.2</version>
     </dependency>
   </dependencies>
   
