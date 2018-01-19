@@ -1,3 +1,5 @@
+<%@ taglib prefix = "form" uri = "http://www.springframework.org/tags/form" %>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" isELIgnored="false"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -11,9 +13,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
-    
+    <link rel="stylesheet" href="<c:url value="resources/assets/css/Pretty-Registration-Form.css"/>">
+    <link rel="stylesheet" href="<c:url value="resources/assets/css/Google-Style-Login.css"/>">
 </head>
   
+</head>
 <body>
 <div class="bs-example">
     <nav id="myNavbar" class="navbar navbar-inverse" role="navigation">
@@ -31,7 +35,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="http://localhost:8080/EcomFront/#">HOME</a></li>
+                    <li><a href="http://localhost:8080/EcomFront/">HOME</a></li>
                     <li><a href="goToRegister"><span class="glyphicon glyphicon-user"></span> Register</a></li>
                   
                 </ul>
@@ -40,20 +44,23 @@
 </div>
 
 </body>
-<form  action="${pageContext.request.contextPath}/login" method="post" class="form-horizontal" >
+<c:if test="${not empty msg}">
+           <div class="msg">${msg}</div>
+       </c:if>
+<form  name="loginform" action="<c:url value="/j_spring_security_check"/>"  method="post" class="form-horizontal" >
 
-<h1 align="center">login</h1>
+<h1 align="center">LOGIN</h1>
 	<div class="form-group">
-		<label for="User Email" class="col-xs-4 control-label">Email</label>
+		<label for="username" class="col-xs-4 control-label">Email</label>
 		<div class="col-xs-4">
-			<input name="username" type="email"  placeholder=" User Email" class="form-control" />
+			<input name="username" type="email" id="username" placeholder=" User Email" class="form-control" />
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label for="code" class="col-xs-4 control-label">Password</label>
 		<div class="col-xs-4">
-			<input name="password"  type="password" placeholder="User Password" class="form-control" />
+			<input name="password"  type="password" placeholder="User Password" id="password" class="form-control" />
 		</div>
 	</div>
             
@@ -61,26 +68,17 @@
 	<label for="code" class="col-xs-4 control-label"></label>
 		
 		<div class="col-xs-4">	
-		<input type="submit" value="login" id="btn-add" class="btn btn-primary" >
+		<input type="submit" value="Login" id="btn-add" class="btn btn-primary" >
 		</div>
 	</div> 
             
-          <center>  <div class="checkbox">
-                <div class="checkbox">
-                    <label>
-                      <input type="checkbox">Remember me</label> 
-                </div>
-            </div></center>
-             
-            
-            <!-- <button class="btn btn-primary  btn-lg btn-signin" type="submit"><span class="glyphicon glyphicon-off"></span>Sign in</button> -->
-            
-      <center>  <form><a href="#" class="forgot-password">Forgot password?</a></form></center>
+       <input type = "hidden" name= "${_csrf.parameterName}" value="${_csrf.token}"/>
+       </form>
         
         
 
 	
-</form>
+
  
 </body>
 

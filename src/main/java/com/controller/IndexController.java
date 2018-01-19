@@ -21,88 +21,93 @@ import com.backend.model.User;
 public class IndexController 
 {
 	@Autowired
-  UserDAO userDAO;
-	@Autowired
-	ProductDAOImpl  productDAOImpl;
-	@Autowired
-	CategoryDAOImpl categoryDAOImpl;
-	
-	
-	@RequestMapping("/")
-	public String index()
-	{
-	
-		return "index";
-	}
-	@RequestMapping(value="/goToRegister",method=RequestMethod.GET)
-	public ModelAndView goTORegister()
-	{
-		ModelAndView mv= new ModelAndView();
-		mv.addObject("user",new User());
-
-		mv.setViewName("Register");
-		return mv;
+	  UserDAO userDAO;
+		@Autowired
+		ProductDAOImpl  productDAOImpl;
+		@Autowired
+		CategoryDAOImpl categoryDAOImpl;
 		
 		
-	}
-	@RequestMapping(value="/saveUser",method=RequestMethod.POST)
-	public ModelAndView saveUserData(@ModelAttribute("user")User user,BindingResult result)
-	{
-		ModelAndView mv=new ModelAndView();
-		if(result.hasErrors())
+		@RequestMapping("/")
+		public String index()
 		{
+		
+			return "index";
+		}
+
+		@RequestMapping("/index")
+		public String home()
+		{
+		
+			return "index";
+		}
+		@RequestMapping(value="/goToRegister",method=RequestMethod.GET)
+		public ModelAndView goToRegister()
+		{
+			ModelAndView mv= new ModelAndView();
+			mv.addObject("user",new User());
+
 			mv.setViewName("Register");
 			return mv;
+			
+			
 		}
-		else{
-			user.setRole("ROLE_USER");
-			userDAO.saveUser(user);
-			mv.setViewName("index");
+		@RequestMapping(value="/saveUser",method=RequestMethod.POST)
+		public ModelAndView saveUserData(@ModelAttribute("user")User user,BindingResult result)
+		{
+			ModelAndView mv=new ModelAndView();
+			if(result.hasErrors())
+			{
+				mv.setViewName("Register");
+				return mv;
 			}
-		return mv;
-	}
-	
-	@RequestMapping(value="/productCustList")
-	public ModelAndView getCustTable(@RequestParam("cid")int cid)
-	{
-		ModelAndView mv=new ModelAndView();
-		mv.addObject("prodList",productDAOImpl.getProdByCatId(cid));
-		mv.setViewName("productCustList");
-		return mv;
-	}
-	@ModelAttribute
-	public void getData(Model m)
-	{
-		m.addAttribute("catList",categoryDAOImpl.retrieve());
-	}
-	@RequestMapping(value="/goTologin",method=RequestMethod.GET)
-	public ModelAndView goTOLogin()
-	{
-		ModelAndView mv= new ModelAndView();
-
-		mv.setViewName("Login");
-		return mv;
+			else{
+				user.setRole("ROLE_USER");
+				user.setEnable(true);
+				userDAO.insertUser(user);
+				mv.setViewName("index");
+				}
+			return mv;
+		}
 		
+		@RequestMapping(value="/productCustList")
+		public ModelAndView getCustTable(@RequestParam("cid")int cid)
+		{
+			ModelAndView mv=new ModelAndView();
+			mv.addObject("prodList",productDAOImpl.getProdByCatId(cid));
+			mv.setViewName("productCustList");
+			return mv;
+		}
+		@ModelAttribute
+		public void getData(Model m)
+		{
+			m.addAttribute("catList",categoryDAOImpl.retrieve());
+	    }
+		@RequestMapping(value="/goToLogin",method=RequestMethod.GET)
+		public ModelAndView goTOLogin()
+		{
+			ModelAndView mv= new ModelAndView();
+
+			mv.setViewName("Login");
+			return mv;
+			
+			
+		}
 		
-	}
-	@RequestMapping("/userLogged")
-	public String underlogged()
-	{
-		return "redirect:/index";
-	}
-	
-	@RequestMapping("/error")
-	public String underError()
-	{
-		return "error";
-	}
-	
-	@RequestMapping("/reLogin")
-	public String relogin()
-	{
-		return "redirect:/goToLogin";
-	}
-
-	
-
+		@RequestMapping("/userLogged")
+	      public String login(){
+			return "redirect:/index";
+		}
+	      
+		
+		@RequestMapping("/error")
+		public String userError()
+		{
+			return "error";
+		}
+		@RequestMapping("/reLogin")
+		public String relogin()
+		{
+			return "redirect:/goToLogin";
+		}
 }

@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <beans xmlns="http://www.springframework.org/schema/beans"    
     xmlns:mvc="http://www.springframework.org/schema/mvc"  
     xmlns:security="http://www.springframework.org/schema/security"  
@@ -13,23 +11,30 @@
         http://www.springframework.org/schema/context/spring-context.xsd
           http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security.xsd">
+        
 <security:http auto-config="true">
-<security:intercept-url pattern="/webapp/resources/**" access="permitALL"/>
-<security:intercept-url pattern="/Login" access="permitALL"/>
-<security:intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')"/>
+<security:intercept-url  pattern="/webapp/resources/**" access="permitAll"/>
+<security:intercept-url  pattern="/Login" access="permitAll"/>
+<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+
 <security:form-login
 login-page="/Login"
+login-processing-url="/j_spring_security_check"
 username-parameter="username"
 password-parameter="password"
 authentication-success-forward-url="/userLogged"
 authentication-failure-forward-url="/error"/>
-<security:logout logout-url="/logout" invalidate-session="true" logout-success-url="/"/>
+
+<security:logout  logout-url="/j_spring_security_logout"
+invalidate-session="true" logout-success-url="/"/>
 <security:access-denied-handler error-page="/error"/>
+
 <security:csrf disabled="true"/>
 </security:http>
+
 <security:authentication-manager>
 <security:authentication-provider>
-<security:jdbc-user-service data-source-ref="datasource"
+<security:jdbc-user-service data-source-ref="dataSource"
 users-by-username-query="select email,password,TRUE as enabled from user where email=?"
 authorities-by-username-query="select email,Role from user where email=?"/>
 </security:authentication-provider>

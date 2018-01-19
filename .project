@@ -3,6 +3,7 @@
 	<name>EcomFront</name>
 	<comment></comment>
 	<projects>
+		<project>EcomBack</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

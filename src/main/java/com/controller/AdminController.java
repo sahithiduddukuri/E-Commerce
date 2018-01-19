@@ -1,6 +1,8 @@
 package com.controller;
 
 import java.io.BufferedOutputStream;
+
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -17,9 +19,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.backend.DAO.*;
-import com.backend.model.*;
+import com.backend.DAO.CategoryDAOImpl;
+import com.backend.DAO.ProductDAOImpl;
+import com.backend.DAO.SupplierDAOImpl;
+import com.backend.model.Category;
+import com.backend.model.Product;
+import com.backend.model.Supplier;
 
 @Controller
 
@@ -40,7 +47,6 @@ public class AdminController
 		return "adding";
 	}
 	
-	
 	@RequestMapping(value="/saveSupp",method=RequestMethod.POST)
 	@Transactional
 	public ModelAndView saveSuppData(@RequestParam("sid") int sid,@RequestParam("sname")String sname)
@@ -53,9 +59,6 @@ public class AdminController
 		mv.setViewName("adding");
 		return mv;
 	}
-	
-	
-	
 	@RequestMapping(value="/saveCat",method=RequestMethod.POST)
 	@Transactional
 	public ModelAndView saveCatData(@RequestParam("cid") int cid,@RequestParam("cname") String cname)
@@ -63,27 +66,29 @@ public class AdminController
 		ModelAndView mv=new ModelAndView();
 		Category cc= new Category();
 		cc.setCid(cid);cc.setCname(cname);
-		categoryDAOImpl.insertCategory(cc);mv.setViewName("adding");
+		categoryDAOImpl.insertCategory(cc);
+		mv.setViewName("adding");
 		return mv;
 	}
-	
-	
-	
 	@RequestMapping(value="/saveProduct",method=RequestMethod.POST)
 	@Transactional
 	public String saveprod(HttpServletRequest request,@RequestParam("file")MultipartFile file)
 	{
 		Product prod= new Product();
-		prod.setPname(request.getParameter("pname"));
+	
+		prod.setPname(request.getParameter("name"));
 		prod.setPrice(Double.parseDouble(request.getParameter("price")));
 		prod.setDescription(request.getParameter("description"));
 		prod.setStock(Integer.parseInt(request.getParameter("stock")));
 		prod.setCategory(categoryDAOImpl.findByCatId(Integer.parseInt(request.getParameter("pCategory"))));
 		prod.setSupplier(supplierDAOImpl.findBySuppId(Integer.parseInt(request.getParameter("pSupplier"))));
+		
 		String filepath =request.getSession().getServletContext().getRealPath("/");
 		String filename= file.getOriginalFilename();
 		prod.setImagName(filename);
 		productDAOImpl.insertProduct(prod);
+		
+		
 		System.out.println("File path"+filepath);
 		try
 		{
@@ -96,19 +101,27 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
+		
 		return "adding";
+
 		
 	}
+	@RequestMapping("editcategory/{cid}")
+	public String editCategory(@PathVariable("cid") int cid, Model model,RedirectAttributes attributes) {
+		System.out.println("editCategory");
+		attributes.addFlashAttribute("category", this.categoryDAOImpl. findByCatId(cid));
+		return "redirect:/adding";
+	}
+
 	
 	@ModelAttribute
 	public void loadingDataInPage(Model m)
 	{
 		m.addAttribute("satList",supplierDAOImpl.retrieve());
 		m.addAttribute("catList",categoryDAOImpl.retrieve());
-		
+		m.addAttribute("prodList",productDAOImpl.retrieve());
 
 	}
-	
 	@RequestMapping("/productList")
 	public ModelAndView prodlist()
 	{
@@ -117,7 +130,7 @@ public class AdminController
 	mv.setViewName("productAdminList");
 	return mv;
 	}
-		
+	
 	@RequestMapping("/supplierList")
 	public ModelAndView satlist()
 	{
@@ -127,7 +140,6 @@ public class AdminController
 		return mv;
 		
 	}
-
 	@RequestMapping("/categoryList")
 	public ModelAndView catlist()
 	{
@@ -137,13 +149,32 @@ public class AdminController
 		return mv;
 		
 	}
-	/*
+
+    
+	@RequestMapping("/deleteSupp/{sid}")
+	public String deleteSupplier(@PathVariable("sid")int sid)
+	{
+		supplierDAOImpl.deleteSupp(sid);
+		return "redirect:/supplierList?del";
+	}
+	@RequestMapping("/deleteCat/{cid}")
+	public String deleteCategory(@PathVariable("cid")int cid)
+	{
+		categoryDAOImpl.deleteCat(cid);
+		return "redirect:/categoryList?del";
+	}
+    
+
+		
 	@RequestMapping("/deleteProd/{pid}")
 	public String deleteProduct(@PathVariable("pid")int pid)
 	{
 		productDAOImpl.deleteProd(pid);
 		return "redirect:/productList?del";
 	}
+	
+	
+
 	
 	@RequestMapping("/updateProd")
 	public ModelAndView updateproduct(@RequestParam("pid") int pid)
@@ -156,16 +187,15 @@ public class AdminController
 		mv.setViewName("updateProduct");
 		return mv;
 	}
-	
-	@RequestMapping(value="/ProductUpdate",method=RequestMethod.POST)
-	@Transactional
-	public String updateProd(HttpServletRequest request,@RequestParam("file")MultipartFile file)
+	@RequestMapping(value="/productUpdate",method=RequestMethod.POST)
+	public String updateprod(HttpServletRequest request,@RequestParam("file")MultipartFile file)
 	{
-		String pid=request.getParameter("pid");
-		
+		String pid= request.getParameter("pid");
 		Product prod= new Product();
 		prod.setPid(Integer.parseInt(pid));
-		prod.setPname(request.getParameter("pname"));
+		
+	
+		prod.setPname(request.getParameter("name"));
 		prod.setPrice(Double.parseDouble(request.getParameter("price")));
 		prod.setDescription(request.getParameter("description"));
 		prod.setStock(Integer.parseInt(request.getParameter("stock")));
@@ -192,7 +222,8 @@ public class AdminController
 		}
 		return "redirect:/productList?update";
 		
-	}*/
+	}
+
 	
 
 
