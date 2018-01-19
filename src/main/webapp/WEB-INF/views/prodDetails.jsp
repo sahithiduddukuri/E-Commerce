@@ -1,4 +1,4 @@
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
@@ -21,7 +21,7 @@
 <h4>${product.price}</h4>
 <h5>${product.supplier.sname}</h5>
 <div class="section" style="padding-bottom:20px;"></div>
-<form action="${pageContext.request.contextPath}/AddToCart" method="post">
+<form action="${pageContext.request.contextPath}/addToCart/${product.pid}" method="post">
 
 <input type="hidden" value="${product.pname}" name="pname"/>
 <input type="hidden" value="${product.pid}" name="pid"/>
