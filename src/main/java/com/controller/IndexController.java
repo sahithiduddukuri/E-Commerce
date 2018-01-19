@@ -12,7 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import com.backend.DAO.UserDAO;
+import com.backend.DAO.CategoryDAO;
 import com.backend.DAO.CategoryDAOImpl;
+import com.backend.DAO.ProductDAO;
 import com.backend.DAO.ProductDAOImpl;
 import com.backend.model.User;
 
@@ -23,9 +25,9 @@ public class IndexController
 	@Autowired
 	  UserDAO userDAO;
 		@Autowired
-		ProductDAOImpl  productDAOImpl;
+		ProductDAO  productDAO;
 		@Autowired
-		CategoryDAOImpl categoryDAOImpl;
+		CategoryDAO categoryDAO;
 		
 		
 		@RequestMapping("/")
@@ -74,14 +76,14 @@ public class IndexController
 		public ModelAndView getCustTable(@RequestParam("cid")int cid)
 		{
 			ModelAndView mv=new ModelAndView();
-			mv.addObject("prodList",productDAOImpl.getProdByCatId(cid));
+			mv.addObject("prodList",productDAO.getProductByCategoryID(cid));
 			mv.setViewName("productCustList");
 			return mv;
 		}
 		@ModelAttribute
 		public void getData(Model m)
 		{
-			m.addAttribute("catList",categoryDAOImpl.retrieve());
+			m.addAttribute("catList",categoryDAO.retrieve());
 	    }
 		@RequestMapping(value="/goToLogin",method=RequestMethod.GET)
 		public ModelAndView goTOLogin()

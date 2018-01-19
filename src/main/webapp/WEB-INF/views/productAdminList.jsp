@@ -40,7 +40,7 @@
 <td><c:out value="${p.category.cname}"></c:out></td>
 <td class="span3"><c:out value="${p.pdescription}"></c:out></td>
 <td><c:out value="${p.price}"></c:out></td>
-<td><c:out value="${p.pstock}"></c:out></td>
+<td><c:out value="${p.stock}"></c:out></td>
 <td><img src="${pageContext.request.contextPath}/resources/${p.imagName}" height="50px" width="50px"></td>
 
 <td><c:set var="contexRoot" value="${pageContext.request.contextPath}"></c:set>

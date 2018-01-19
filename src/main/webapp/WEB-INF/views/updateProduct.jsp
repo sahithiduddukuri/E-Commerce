@@ -26,7 +26,7 @@
 <input value="${prod.price}" type="text" name="price" required/>
 
 <h4 class="input-title">Product Stock</h4><br>
-<input value="${prod.pstock}" type="number" name="pstock" required/>
+<input value="${prod.stock}" type="number" name="stock" required/>
 
 <div class="form-group">
 <table>

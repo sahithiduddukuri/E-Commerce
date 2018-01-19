@@ -38,12 +38,12 @@
 <td><c:out value="${p.pname}"></c:out></td>
 <td><c:out value="${p.supplier.sname}"></c:out></td>
 <td><c:out value="${p.category.cname}"></c:out></td>
-<td class="span3"><c:out value="${p.description}"></c:out></td>
+<td class="span3"><c:out value="${p.pdescription}"></c:out></td>
 <td><c:out value="${p.price}"></c:out></td>
 <td><c:out value="${p.stock}"></c:out></td>
 <td><img src="${pageContext.request.contextPath}/resources/${p.imagName}" height="50px" width="50px"></td>
 <td><c:set var="contexRoot" value="${pageContext.request.contextPath}"></c:set>
-<a class="btn btn-info" role="button" href="<c:url value="${pageContext.request.contextPath}/prodDetails/${p.pid}"/>">Details</a>
+<a class="btn btn-info" role="button" href="<c:url value="/prodDetails/${p.pid}"/>">Details</a>
 <tr>
 </c:forEach>
 </table>

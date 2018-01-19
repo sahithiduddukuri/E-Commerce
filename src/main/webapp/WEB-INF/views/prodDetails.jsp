@@ -16,17 +16,17 @@
 <img style="max-width:100%;margin-top:30px;" src="${pageContext.request.contextPath}/resources/${prod.imagName}">
 </div>
 <div class="col-sm-5" style="border:0px solid gry">
-<h3>${product.pname}</h3>
-<h4>${product.pdescription}</h4>
-<h4>${product.price}</h4>
-<h5>${product.supplier.sname}</h5>
+<h3>${prod.pname}</h3>
+<h4>${prod.pdescription}</h4>
+<h4>${prod.price}</h4>
+<h5>${prod.supplier.sname}</h5>
 <div class="section" style="padding-bottom:20px;"></div>
-<form action="${pageContext.request.contextPath}/addToCart/${product.pid}" method="post">
+<form action="${pageContext.request.contextPath}/AddToCart" method="post">
 
-<input type="hidden" value="${product.pname}" name="pname"/>
-<input type="hidden" value="${product.pid}" name="pid"/>
-<input type="hidden" value="${product.price}" name="price"/>
-<input type="hidden" value="${product.imagName}" name="imagName"/>
+<input type="hidden" value="${prod.pname}" name="pname"/>
+<input type="hidden" value="${prod.pid}" name="pid"/>
+<input type="hidden" value="${prod.price}" name="price"/>
+<input type="hidden" value="${prod.imagName}" name="imagName"/>
 
 
 <input type="number" class="form-control"name="pQty" required/><br><br>
