@@ -8,9 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container">
 
-<c:url value="/ProductUpdate" var="pru"></c:url>
-<form  method="post" action="ProductUpdate" enctype="multipart/form-data">
+<c:url value="/productUpdate" var="prod"></c:url>
+<form  method="post" action="productUpdate" enctype="multipart/form-data">
 <span id="reauth-email" class="reauth-email"></span>
 
 <input type="hidden" name="pid" value="${prod.pid}">
@@ -35,7 +36,7 @@
 <select class="from-control" name="pSupplier" required>
 <option value="">------Select Supplier---</option>
 <c:forEach items="${satList}" var="sat">
-<option value="${sat.sid}">${sat.supplierName}</option>
+<option value="${sat.sid}">${sat.sname}</option>
 </c:forEach>
 </select>
 </tb>
@@ -46,7 +47,7 @@
 <td><input classs="form-control" type="file" name="file" acept="image/*"></td>
 </div>
 <br><br>
-<button class="btn btn-lg btn-primary" type="submit">Save</button>
+<button class="btn btn-lg btn-primary" type="submit">Update</button>
 <button class="btn btn-lg btn-primary" type="reset">Cancel</button>
 </form>
 

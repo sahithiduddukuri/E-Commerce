@@ -38,13 +38,14 @@
 <td><c:out value="${p.pname}"></c:out></td>
 <td><c:out value="${p.supplier.sname}"></c:out></td>
 <td><c:out value="${p.category.cname}"></c:out></td>
-<td class="span3"><c:out value="${p.description}"></c:out></td>
-<td><c:out value="${p.stock}"></c:out></td>
+<td class="span3"><c:out value="${p.pdescription}"></c:out></td>
 <td><c:out value="${p.price}"></c:out></td>
+<td><c:out value="${p.pstock}"></c:out></td>
 <td><img src="${pageContext.request.contextPath}/resources/${p.imagName}" height="50px" width="50px"></td>
 
 <td><c:set var="contexRoot" value="${pageContext.request.contextPath}"></c:set>
-<a class="btn btn-info" role="button" href="${contextRoot}/updateProd?pid=<c:out value="${p.pid}"></c:out>"/>Edit</a>
+
+<a class="btn btn-info" role="button" href="<c:url value="/updateProd/${p.pid}"/>"/>Edit</a>
 <a class="btn btn-danger" role="button" href="<c:url value="/deleteProd/${p.pid}"/>">Delete</a>
 
 <tr>

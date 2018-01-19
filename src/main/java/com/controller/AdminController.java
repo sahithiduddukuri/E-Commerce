@@ -76,7 +76,7 @@ public class AdminController
 	{
 		Product prod= new Product();
 	
-		prod.setPname(request.getParameter("name"));
+		prod.setPname(request.getParameter("pname"));
 		prod.setPrice(Double.parseDouble(request.getParameter("price")));
 		prod.setDescription(request.getParameter("description"));
 		prod.setStock(Integer.parseInt(request.getParameter("stock")));

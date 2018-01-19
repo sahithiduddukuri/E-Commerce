@@ -53,7 +53,7 @@
            
     
        
-        <li><a href="${pageContext.request.contextPath}/goToCart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart
+        <li><a href="${pageContext.request.contextPath}/AddToCart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart
         <i class="fa fa-cart-plus" aria-hidden="true"></i></a></li>
       </ul>
         <!-- <div class="dropdown">
