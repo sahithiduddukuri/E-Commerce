@@ -34,7 +34,7 @@ invalidate-session="true" logout-success-url="/"/>
 
 <security:authentication-manager>
 <security:authentication-provider>
-<security:jdbc-user-service data-source-ref="dataSource"
+<security:jdbc-user-service data-source-ref="datasource"
 users-by-username-query="select email,password,TRUE as enabled from user where email=?"
 authorities-by-username-query="select email,Role from user where email=?"/>
 </security:authentication-provider>
